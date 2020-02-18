@@ -25,13 +25,13 @@ public class IOCTest {
     @Test
     public  void test02() {
        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig2.class);
-//        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-//
-//        for (String name : beanDefinitionNames){
-//            System.out.println(name);
-//        }
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+
+        for (String name : beanDefinitionNames){
+            System.out.println(name);
+        }
         //根据id获取实例
-          System.out.println("ioc容器启动");
+        System.out.println("ioc容器创建完成");
         Object bean = applicationContext.getBean("person");
         Object bean2 = applicationContext.getBean("person");
         System.out.println(bean == bean2);
