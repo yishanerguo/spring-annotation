@@ -1,4 +1,5 @@
 import com.wangshao.config.MainConfig;
+import com.wangshao.config.MainConfig2;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,4 +21,19 @@ public class IOCTest {
             System.out.println(name);
         }
     }
+
+    @Test
+    public  void test02() {
+       ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig2.class);
+//        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+//
+//        for (String name : beanDefinitionNames){
+//            System.out.println(name);
+//        }
+        //根据id获取实例
+          System.out.println("ioc容器启动");
+        Object bean = applicationContext.getBean("person");
+        Object bean2 = applicationContext.getBean("person");
+        System.out.println(bean == bean2);
+}
 }
