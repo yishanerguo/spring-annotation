@@ -1,11 +1,10 @@
 package com.wangshao.config;
 
 import com.wangshao.bean.Person;
+import com.wangshao.condition.LInuxCondition;
+import com.wangshao.condition.WindowsCondition;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 /**
  * @author liutao
@@ -40,4 +39,22 @@ public class MainConfig2 {
         return new Person("张三",25);
     }
 
+    /**
+     * @Conditional({condition}):按照一定的条件进行判断,满足条件给容器中注册bean
+     *
+     * 如果系统是windows,给容器中注册("bill")
+     * 如果是linux系统,给容器中注册("linux")
+     *
+     */
+    @Conditional({WindowsCondition.class})
+    @Bean("bill")
+    public  Person person01(){
+        return new Person("Bill Gates", 62);
+    }
+
+    @Conditional({LInuxCondition.class})
+    @Bean("linux")
+    public  Person person02(){
+        return new Person("linux", 48);
+    }
 }
