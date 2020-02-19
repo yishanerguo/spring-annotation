@@ -8,8 +8,8 @@
 <!--
     <context:component-scan base-package="com.wangshao" use-default-filters="false"></context:component-scan>
 -->
-    <bean  id="person" class="com.wangshao.bean.Person">
+    <bean  id="person" class="com.wangshao.bean.Person" init-method="toString" destroy-method="toString">
         <property name="name" value="张三"/>
         <property name="age" value="18"/>
     </bean>
-</beans>
+</beans><!---->
