@@ -1,6 +1,7 @@
 package com.wangshao.config;
 
 import com.wangshao.bean.Color;
+import com.wangshao.bean.ColorFactoryBean;
 import com.wangshao.bean.Person;
 import com.wangshao.bean.Red;
 import com.wangshao.condition.LInuxCondition;
@@ -71,5 +72,13 @@ public class MainConfig2 {
      *       1>@Import(要导入到容器的组件):容器中就会自动注册这个组件,id默认是全类名
      *       2>ImportSelector:返回需要导入组件的全类名数
      *       3>ImportBeanDefinitionRegistrar:
+     * 4.使用spring提供的FactoryBean(工厂bean)
+     *      1>默认获取的是工厂bean调用getObject创建的对象
+     *      2>要获取工厂bean本身,我们需要给id前面加一个&
      */
+
+    @Bean
+    public ColorFactoryBean colorFactoryBean(){
+        return new ColorFactoryBean();
+    }
 }
