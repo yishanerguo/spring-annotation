@@ -37,6 +37,8 @@ import org.springframework.context.annotation.Scope;
  *  invokeInitMethods(beanName, wrappedBean, mbd);  执行初始化
  *  applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
  *  }
+ *  spring底层对BeanPostProcessor的使用
+ *      bean赋值,注入其他组件,@autowired,生命周期注解功能,@Async.....
  *
  * 1>指定初始化和销毁方法
  *       指定init-method和destory-method
