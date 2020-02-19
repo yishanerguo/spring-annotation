@@ -16,11 +16,28 @@ import org.springframework.context.annotation.Scope;
  * 构建(对象创建)
  *      单实例:在容器启动时创建对象
  *      多实例:在每次获取的时候创建对象
+ *
+ *  BeanPostProcessor.postProcessBeforeInitialization
  * 初始化:
  *      对象创建完成,并赋值好,调用初始化方法.
+ *
+ *  BeanPostPostProcessor.postProcessAfterInitialization
+ *
  *  销毁:
  *      单实例:容器关闭
  *      多实例:容器不会管理这个bean,容器不会调用销毁方法,可以手动调用
+ *
+ *  populateBean(beanName, mbd, instanceWrapper); 给bean进行属性赋值
+ *
+ *
+ *  {
+ *  遍历得到容器中所有的BeanPostProcessor:挨个执行beforeInitialization
+ *  一旦返回null,跳出for循环,不会执行后面
+ *  applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
+ *  invokeInitMethods(beanName, wrappedBean, mbd);  执行初始化
+ *  applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
+ *  }
+ *
  * 1>指定初始化和销毁方法
  *       指定init-method和destory-method
  * 2>通过让bean实现InitializingBean(定义初始化)
