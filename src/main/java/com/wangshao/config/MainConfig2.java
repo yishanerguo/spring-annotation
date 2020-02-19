@@ -1,7 +1,11 @@
 package com.wangshao.config;
 
+import com.wangshao.bean.Color;
 import com.wangshao.bean.Person;
+import com.wangshao.bean.Red;
 import com.wangshao.condition.LInuxCondition;
+import com.wangshao.condition.MyImportBeanDefinitionRegistrar;
+import com.wangshao.condition.MyImportSelector;
 import com.wangshao.condition.WindowsCondition;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
@@ -12,6 +16,7 @@ import org.springframework.context.annotation.*;
  */
 
 @Configuration
+@Import({Color.class, Red.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class}) //导入组件,id默认是组件的全类名
 public class MainConfig2 {
 
     //默认都是单实例(单例模式)
@@ -57,4 +62,14 @@ public class MainConfig2 {
     public  Person person02(){
         return new Person("linux", 48);
     }
+
+    /**
+     * 给容器中注册组件:
+     * 1.包扫描+组件标注注解(@controller/@service/@repository/@component)自己写的
+     * 2.@bean:导入的第三包里面的组件
+     * 3.@import:快速个容器导入一个组件:
+     *       1>@Import(要导入到容器的组件):容器中就会自动注册这个组件,id默认是全类名
+     *       2>ImportSelector:返回需要导入组件的全类名数
+     *       3>ImportBeanDefinitionRegistrar:
+     */
 }

@@ -57,4 +57,14 @@ public class IOCTest {
         Map<String, Person> beansOfType = applicationContext.getBeansOfType(Person.class);
         System.out.println(beansOfType);
     }
+
+    @Test
+    public void  testImport(){
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig2.class);
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        for (String name : beanDefinitionNames) {
+            System.out.println(name);
+        }
+    }
+
 }
