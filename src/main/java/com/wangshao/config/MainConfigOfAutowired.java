@@ -35,10 +35,16 @@ import java.util.Calendar;
  *             没有能支持@Primary功能,没有能支持@Autowired(required = false)
  *        @Inject:
  *            需要导入javax.inject的包,和Autowired的功能一样,没有required=false的功能
- *    3>@Autowired标注:构造器,参数,方法,属性
+ *
+ *  3>@Autowired标注:构造器,参数,方法,属性
  *           1.标注在方法位置: @Bean+方法参数,参数从容器中获取,默认不写
  *           2.标注在构造器:如果组件只有一个有参构造器,这个有参构造器的@Autowired可以省略,参数位置的组件还是可以从容器中获取
  *
+ *  4>自定义组件想要使用spring容器底层的一些组件(applicationcontext,beanfactory....)
+ *       自定义组件实现xxxAware接口,在创建对象的时候,会调用接口规定的方法注入相关组件:Aware;
+ *       把spring底层一些组件注入到自定义的bean中:
+ *       xxxAware:功能使用xxxxxProcessor来处理:
+ *          ApplicationContextAware==>ApplicationContextAwareProcessor
  */
 
 @Configuration
