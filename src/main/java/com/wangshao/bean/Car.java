@@ -1,11 +1,13 @@
 package com.wangshao.bean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author liutao
  * @create 2020-02-19-17:52
  */
 
-
+@Component
 public class Car {
 
     public Car() {

@@ -1,3 +1,6 @@
+import com.wangshao.bean.Boss;
+import com.wangshao.bean.Car;
+import com.wangshao.bean.Color;
 import com.wangshao.bean.Person;
 import com.wangshao.config.MainConfigOfAutowired;
 import com.wangshao.config.MainConfigOfPropertyValues;
@@ -6,6 +9,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.Environment;
+
+import java.net.CacheRequest;
 
 /**
  * @author liutao
@@ -20,8 +25,14 @@ public class IOCTestAutowired {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfigOfAutowired.class);
         System.out.println("容器创建完成");
 
-        BookService bookService = applicationContext.getBean(BookService.class);
-        System.out.println(bookService);
+//        BookService bookService = applicationContext.getBean(BookService.class);
+//        System.out.println(bookService);
+        Boss boss = applicationContext.getBean(Boss.class);
+        System.out.println(boss);
+        Car car = applicationContext.getBean(Car.class);
+        System.out.println(car);
+        Color col = applicationContext.getBean(Color.class);
+        System.out.println(col);
         ((AnnotationConfigApplicationContext) applicationContext).close();
     }
 }

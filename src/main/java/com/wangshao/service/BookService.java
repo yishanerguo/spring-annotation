@@ -17,9 +17,9 @@ import javax.inject.Inject;
 public class BookService {
 
     //@Qualifier("bookDao")  //指定装配对象
-   // @Autowired
+    @Autowired
    // @Resource(name="bookDao2")
-    @Inject
+    //@Inject
     private BookDao bookDao;
 
     public void print(){

@@ -1,11 +1,15 @@
 package com.wangshao.config;
 
+import com.wangshao.bean.Car;
+import com.wangshao.bean.Color;
 import com.wangshao.dao.BookDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
 
 /**
  * @author liutao
@@ -31,10 +35,14 @@ import org.springframework.stereotype.Component;
  *             没有能支持@Primary功能,没有能支持@Autowired(required = false)
  *        @Inject:
  *            需要导入javax.inject的包,和Autowired的功能一样,没有required=false的功能
+ *    3>@Autowired标注:构造器,参数,方法,属性
+ *           1.标注在方法位置: @Bean+方法参数,参数从容器中获取,默认不写
+ *           2.标注在构造器:如果组件只有一个有参构造器,这个有参构造器的@Autowired可以省略,参数位置的组件还是可以从容器中获取
+ *
  */
 
 @Configuration
-@ComponentScan({"com.wangshao.dao","com.wangshao.service","com.wangshao.controller"})
+@ComponentScan({"com.wangshao.dao","com.wangshao.service","com.wangshao.controller","com.wangshao.bean"})
 public class MainConfigOfAutowired {
 
     @Primary
@@ -43,5 +51,17 @@ public class MainConfigOfAutowired {
         BookDao bookDao = new BookDao();
         bookDao.setLable("2");
         return bookDao;
+    }
+
+    /**
+     * @bean标注的方法创建对象的时候,方法参数的值从容器中获取
+     * @param car
+     * @return
+     */
+    @Bean
+    public Color color(Car car){
+        Color color = new Color();
+        color.setCar(car);
+        return  color;
     }
 }
