@@ -26,7 +26,7 @@ public class IOCTest_AOP {
 //        MathCalculator mathCalculator = new MathCalculator();
 //        mathCalculator.div(1,1);
         MathCalculator mathCalculator = applicationContext.getBean(MathCalculator.class);
-        mathCalculator.div(1, 0);
+        mathCalculator.div(1, 1);
 
         ((AnnotationConfigApplicationContext) applicationContext).close();
     }
