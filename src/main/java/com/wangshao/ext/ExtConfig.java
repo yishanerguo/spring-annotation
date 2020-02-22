@@ -48,6 +48,40 @@ import org.springframework.context.annotation.Configuration;
  *           ContextCloseEvent,关系容器会发布这个事件
  *      4,发布一个事件
  *          applicationContext.publishEvent();
+ *
+ *    原理:
+ *       ContextRefreshedEvent,ContextClosedEvent,IOCTest_ext$1[source=我发布的事件]
+ *    1.ContextRefreshedEvent事件:
+ *        1.容器创建对象:refresh()
+ *        2.finishRefresh();容器刷新完成
+ *    2.自己发布的事件:
+ *    3.容器关闭会发布ContextClosedEvent
+ *
+ *     事件的发布流程:
+ *        3.publishEvent(new ContextRefreshedEvent(this));
+ *         事件的发布流程:
+ *             1.获取事件的多播器(派发器):getApplicationEventMulticaster(),发给多个监听器,进行感知
+ *             2.multicastEvent派发事件
+ *             3.获取到所有的ApplicationListener:
+ *                for (final ApplicationListener<?> listener : getApplicationListeners(event, type))
+ *                1.如果有Executor,可以支持使用异步派发:Executor executor = getTaskExecutor();
+ *                2.否则,同步的方式直接执行listener方法:invokeListener(listener, event);
+ *                拿到listener回调onApplicationEvent方法
+ *
+ *     [事件多播器(派发器)]
+ *      1.容器创建对象:refresh()
+ *      2.	initApplicationEventMulticaster();初始化ApplicationEventMulticaster
+ *              1.先去容器中有没有id="applicationEventMulticastor"的组件
+ *              2.如果没有就新建一个this.applicationEventMulticaster = new SimpleApplicationEventMulticaster(beanFactory);
+ *                并且加入容器中beanFactory.registerSingleton();我们在其他组件要派发事件,自动注入这个applicationEventMulticaster
+ *
+ *     [容器中有哪些监听器]
+ *       1.容器在创建对象:refresh()
+ *       2.registerListeners();
+ *       从容器中拿到所有的监听器,把他们注册到applicationEventMulticaster中:
+ *        String[] listenerBeanNames = getBeanNamesForType(ApplicationListener.class, true, false);
+ *        将listener注册到applicationEventMulticaster中
+ *        getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
  */
 
 @ComponentScan("com.wangshao.ext")
