@@ -82,6 +82,17 @@ import org.springframework.context.annotation.Configuration;
  *        String[] listenerBeanNames = getBeanNamesForType(ApplicationListener.class, true, false);
  *        将listener注册到applicationEventMulticaster中
  *        getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
+ *
+ *     可以直接用注解@EventListener
+ *      原理:使用EventListenerMethodProcessor处理器来解析方法上的@EventListener
+ *      SmartInitializingSingleton:
+ *        1.ioc容器创建对象并refresh容器
+ *        2.finishBeanFactoryInitialization(beanFactory);初始化剩下所有的单实例bean
+ *           1.先创建所有的单实例bean:getBean();
+ *           2.获取所有创建好的单实例bean,判断是否是SmartInitializingSingleton类型的
+ *              如果是就调用afterSingletonsInstantiated();
+ *
+ *
  */
 
 @ComponentScan("com.wangshao.ext")
