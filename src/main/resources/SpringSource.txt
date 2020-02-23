@@ -147,7 +147,20 @@ spring容器的refresh()[创建刷新];
 
     3.publishEvent(new ContextRefreshedEvent(this));发布容器刷新完成事件
     4.	LiveBeansView.registerApplicationContext(this);
-
+===============================总结========================================
+1.spring容器在启动的时候,先会保存所有注册进来的bean的定义信息
+   1.xml注册bean:<bean>
+   2.注解注册bean:@service,@component,@bean.....
+2.spring容器会合适的时机创建这些bean
+   1.用到这个bean的时候:利用getBean创建bean:创建好以后保存在容器中
+   2.统一创建剩下所有的bean的时候:finishBeanFactoryInitialization()
+3.后置处理器:
+   1.每个bean创建完成,都会使用各种后置处理器进行处理,来增强bean的功能
+      AutowiredAnnotationBeanPostProcessor:处理自动注入
+      AnnotationAwareAspectJAutoProxyCreator:来做AOP功能
+ 4.事件驱动模式:
+    ApplicationListener:事件监听
+    ApplicationEventMulticaster;事件派发
 
 
 
